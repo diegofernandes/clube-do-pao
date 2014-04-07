@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <MEMBRO
+        id="1"
+        nome="Danny R. Dehaven"
+        email="dannyrdehaven@rhyta.com"></MEMBRO>
+     <MEMBRO_DISPONBILIDADE MEMBRO_ID="1" DISPONBILIDADE="1">
+     </MEMBRO_DISPONBILIDADE>
+     <MEMBRO_DISPONBILIDADE MEMBRO_ID="1" DISPONBILIDADE="5">
+     </MEMBRO_DISPONBILIDADE>
+     
+     <MEMBRO
+        id="2"
+        nome="Stephen S. Pendergrast"
+        email="stephenspendergrast@jourrapide.com"></MEMBRO>
+     <MEMBRO_DISPONBILIDADE MEMBRO_ID="3" DISPONBILIDADE="2">
+     </MEMBRO_DISPONBILIDADE>
+     
+     
+     <MEMBRO
+        id="3"
+        nome="William L. Stewart"
+        email="williamlstewart@jourrapide.com"></MEMBRO>
+     <MEMBRO_DISPONBILIDADE MEMBRO_ID="3" DISPONBILIDADE="4">
+     </MEMBRO_DISPONBILIDADE>
+
+    
+</dataset>

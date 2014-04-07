@@ -34,8 +34,7 @@
 
 	<jdbc:embedded-database id="dataSource" />
 	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="classpath:dataloader/schema.sql" />
-		<jdbc:script location="classpath:dataloader/seed_filmes.sql" />
+		<jdbc:script location="classpath:dataloader/initialData.sql" />
 	</jdbc:initialize-database>
 
 	<bean id="entityManagerFactory"
@@ -55,7 +54,6 @@
 			</props>
 		</property>
 	</bean>
-
 
 	
 </beans>
