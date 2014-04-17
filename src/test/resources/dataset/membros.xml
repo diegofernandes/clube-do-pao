@@ -13,7 +13,7 @@
         id="2"
         nome="Stephen S. Pendergrast"
         email="stephenspendergrast@jourrapide.com"></MEMBRO>
-     <MEMBRO_DISPONBILIDADE MEMBRO_ID="3" DISPONBILIDADE="2">
+     <MEMBRO_DISPONBILIDADE MEMBRO_ID="2" DISPONBILIDADE="2">
      </MEMBRO_DISPONBILIDADE>
      
      

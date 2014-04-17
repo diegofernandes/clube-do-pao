@@ -5,14 +5,14 @@ import java.util.List;
 
 public interface Repository<T, K extends Serializable> extends Serializable {
 
-	T find(K id);
+	public T find(K id);
 
-	List<T> findAll(Integer firstResult, Integer maxResults);
+	public List<T> findAll(Integer firstResult, Integer maxResults);
 
-	List<T> findAll();
+	public List<T> findAll();
 
-	T save(T entity);
+	public T save(T entity);
 
-	void remove(T entity);
+	public void remove(T entity);
 
 }

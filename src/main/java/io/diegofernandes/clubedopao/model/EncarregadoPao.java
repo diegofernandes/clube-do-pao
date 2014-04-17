@@ -44,4 +44,11 @@ public class EncarregadoPao {
 		this.idEncarregado = idEncarregado;
 	}
 
+	@Override
+	public String toString() {
+		return "EncarregadoPao [data=" + data + ", idEncarregado="
+				+ idEncarregado + ", nomeEncarregado=" + nomeEncarregado + "]";
+	}
+	
+
 }
