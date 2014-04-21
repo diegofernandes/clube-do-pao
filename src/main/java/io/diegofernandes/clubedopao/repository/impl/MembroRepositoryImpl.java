@@ -1,5 +1,7 @@
 package io.diegofernandes.clubedopao.repository.impl;
 
+import java.util.List;
+
 import io.diegofernandes.clubedopao.model.Membro;
 import io.diegofernandes.clubedopao.repository.MembroRepository;
 
@@ -23,6 +25,19 @@ public class MembroRepositoryImpl extends AbstractRepository<Membro, Long>
 
 		query.setParameter("email", email);
 		return query.getSingleResult();
+	}
+
+	@Override
+	public List<Membro> findByNameOrEmail(final String filter,
+			final Integer firstResult, final Integer maxResults) {
+		final TypedQuery<Membro> typedQuery = this.getEntityManager()
+				.createNamedQuery("Membro.findByNomeOrEmail", Membro.class);
+
+		addPagination(firstResult, maxResults, typedQuery);
+
+		typedQuery.setParameter("filter", "%"+  filter + "%");
+
+		return typedQuery.getResultList();
 	}
 
 }

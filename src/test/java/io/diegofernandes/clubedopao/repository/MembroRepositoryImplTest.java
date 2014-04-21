@@ -1,16 +1,21 @@
 package io.diegofernandes.clubedopao.repository;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 import io.diegofernandes.clubedopao.BaseTest;
 import io.diegofernandes.clubedopao.model.Membro;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -79,6 +84,22 @@ public class MembroRepositoryImplTest extends BaseTest {
 		assertEquals(membro.getId(), id);
 		assertEquals(membro.getNome(), "Danny R. Dehaven");
 
+	}
+	
+	@Test
+	public void testFindByNameOrEmail(){
+		final String filter = "danny";
+		final List<Membro> membros = this.membroRepository.findByNameOrEmail(filter, null, null);
+		final Pattern p = Pattern.compile(filter, Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher("");
+		for (Membro membro : membros) {
+			m.reset(membro.getNome());
+			assertTrue("Nome não esperado",m.find());
+			m.reset(membro.getEmail());
+			assertTrue("Email não esperado",m.find());
+			
+		}
+	
 	}
 
 }

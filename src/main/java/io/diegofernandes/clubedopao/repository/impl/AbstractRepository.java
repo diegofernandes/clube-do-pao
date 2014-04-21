@@ -10,6 +10,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
+import org.springframework.transaction.annotation.Transactional;
+
+@Transactional(readOnly=true)
 public abstract class AbstractRepository<T, K extends Serializable> implements
 		Repository<T, K> {
 
@@ -48,21 +51,28 @@ public abstract class AbstractRepository<T, K extends Serializable> implements
 
 		final TypedQuery<T> query = this.entityManager.createQuery(criteria);
 
+		addPagination(firstResult, maxResults, query);
+		return query.getResultList();
+	}
+
+	protected void addPagination(final Integer firstResult,
+			final Integer maxResults, final TypedQuery<T> query) {
 		if (maxResults != null) {
 			query.setMaxResults(maxResults);
 		}
 		if (firstResult != null) {
 			query.setFirstResult(firstResult);
 		}
-		return query.getResultList();
 	}
 
 	@Override
+	@Transactional(readOnly=false)
 	public T save(final T entity) {
 		return this.entityManager.merge(entity);
 	}
 
 	@Override
+	@Transactional(readOnly=false)
 	public void remove(final T entity) {
 		this.entityManager.remove(entity);
 	}

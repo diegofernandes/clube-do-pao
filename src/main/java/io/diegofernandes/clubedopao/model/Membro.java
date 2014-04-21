@@ -18,7 +18,8 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "MEMBRO", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"ID", "EMAIL" }))
-@NamedQueries({ @NamedQuery(name = "Membro.findByEmail", query = "select o from Membro o where o.email like :email") })
+@NamedQueries({ @NamedQuery(name = "Membro.findByEmail", query = "select o from Membro o where o.email like :email"),
+	@NamedQuery(name="Membro.findByNomeOrEmail", query = "select o from Membro o where lower(o.nome) like lower(:filter) or  lower(o.email) like lower(:filter)")})
 public class Membro implements Serializable {
 
 	/**
