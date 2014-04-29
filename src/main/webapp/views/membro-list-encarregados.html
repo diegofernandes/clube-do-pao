@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Membros</div>
+  <div class="panel-body">
+    <a class="btn btn-success hidden-print" href="#/membros/new">
+      <span class="glyphicon glyphicon-plus-sign"> Novo</span>
+    </a
+  </div>
+
+  <!-- Table -->
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>e-mail</th>
+          <th>Disponibilidade</th>
+          <th class="hidden-print"><span class="glyphicon glyphicon-cog"></span></th>
+        </tr>
+    </thead>
+    <tboody>
+      <tr ng-repeat="membro in membros">
+        <td>{{membro.id}}</td>
+        <td>{{membro.nome}}</td>
+        <td>{{membro.email}}</td>
+        <td><div><span ng-repeat="disp in membro.disponibilidade" class="label label-default">{{disp | dayOfWeek}}</span><div></td>
+        <td class="hidden-print"><a href="#/membros/edit/{{membro.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+      </tr>
+    </tboody>
+  </table>
+</div>

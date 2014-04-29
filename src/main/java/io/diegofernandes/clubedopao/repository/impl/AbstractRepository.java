@@ -8,7 +8,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,6 +78,11 @@ public abstract class AbstractRepository<T, K extends Serializable> implements
 	@Transactional(readOnly=false)
 	public void remove(final T entity) {
 		this.entityManager.remove(entity);
+	}
+	@Override
+	@Transactional(readOnly=false)
+	public void remove(final K id) {
+		this.remove(this.find(id));
 	}
 
 	public EntityManager getEntityManager() {

@@ -39,7 +39,7 @@ public class MembroServiceImpl implements MembroService {
 		
 		@Override
 		public int compare(Membro left, Membro right) {
-			return left.getDisponbilidade().size() - right.getDisponbilidade().size();
+			return left.getDisponibilidade().size() - right.getDisponibilidade().size();
 		}
 	};
 
@@ -98,7 +98,7 @@ public class MembroServiceImpl implements MembroService {
 				.create();
 
 		for (Membro membro : membros) {
-			multimap.putAll(membro, membro.getDisponbilidade());
+			multimap.putAll(membro, membro.getDisponibilidade());
 		}
 
 		SetMultimap<Integer, Membro> inverse = Multimaps.invertFrom(multimap,
@@ -110,16 +110,4 @@ public class MembroServiceImpl implements MembroService {
 		int day = data.get(Calendar.DAY_OF_WEEK);
 		return day != Calendar.SATURDAY && day != Calendar.SUNDAY;
 	}
-
-	private void bla() {
-		ArrayListMultimap<String, Integer> multimap = ArrayListMultimap
-				.create();
-		multimap.putAll("b", Ints.asList(2, 4, 6));
-		multimap.putAll("a", Ints.asList(4, 2, 1));
-		multimap.putAll("c", Ints.asList(2, 5, 3));
-
-		TreeMultimap<Integer, String> inverse = Multimaps.invertFrom(multimap,
-				TreeMultimap.<Integer, String> create());
-	}
-
 }

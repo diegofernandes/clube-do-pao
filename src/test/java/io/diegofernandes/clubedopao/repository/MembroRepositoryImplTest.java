@@ -64,7 +64,7 @@ public class MembroRepositoryImplTest extends BaseTest {
 		assertNotNull(membro2);
 		assertEquals(membro2.getNome(), membro.getNome());
 		assertEquals(membro2.getEmail(), membro.getEmail());
-		assertThat(membro2.getDisponbilidade(), is(membro.getDisponbilidade()));
+		assertThat(membro2.getDisponibilidade(), is(membro.getDisponibilidade()));
 	}
 
 	@Test
@@ -73,6 +73,13 @@ public class MembroRepositoryImplTest extends BaseTest {
 		this.membroRepository.remove(membro);
 
 		assertNull(this.membroRepository.find(membro.getId()));
+	}
+	
+	@Test
+	public void testRemoveById() {
+		this.membroRepository.remove(1L);
+
+		assertNull(this.membroRepository.find(1L));
 	}
 
 	@Test
@@ -91,12 +98,12 @@ public class MembroRepositoryImplTest extends BaseTest {
 		final String filter = "danny";
 		final List<Membro> membros = this.membroRepository.findByNameOrEmail(filter, null, null);
 		final Pattern p = Pattern.compile(filter, Pattern.CASE_INSENSITIVE);
-		Matcher m = p.matcher("");
+		Matcher matcherName = p.matcher("");
+		Matcher matcherEmail = p.matcher("");
 		for (Membro membro : membros) {
-			m.reset(membro.getNome());
-			assertTrue("Nome não esperado",m.find());
-			m.reset(membro.getEmail());
-			assertTrue("Email não esperado",m.find());
+			matcherName.reset(membro.getNome());
+			matcherEmail.reset(membro.getEmail());
+			assertTrue(matcherName.find() || matcherEmail.find());
 			
 		}
 	

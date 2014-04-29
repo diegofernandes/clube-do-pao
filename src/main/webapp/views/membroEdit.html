@@ -1,0 +1,32 @@
+
+<form name="membroForm">
+  <div class="control-group" ng-class="{error: membroForm.nome.$invalid && !membroForm.nome.$pristine}">
+    <label>Nome</label>
+    <input type="text" name="nome" ng-model="membro.nome" required>
+    <span ng-show="membroForm.nome.$error.required && !membroForm.nome.$pristine" class="help-inline">
+        Obrigatório {{membroForm.nome.$pristine}}</span>
+  </div>
+
+  <div class="control-group" ng-class="{error: membroForm.email.$invalid && !membroForm.email.$pristine}">
+    <label>Email</label>
+    <input type="email" name="email" ng-model="membro.email" required>
+    <span ng-show="membroForm.site.$error.required && !membroForm.email.$pristine" class="help-inline">
+        Obrigatório</span>
+    <span ng-show="membroForm.site.$error.email" class="help-inline">
+        Email inválido</span>
+  </div>
+<div class="control-group" ng-class="{error: membroForm.email.$invalid && !membroForm.email.$pristine}">
+  <label>Disponibilidade</label>
+<div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-default" checkbox-group ng-repeat="(day, label) in weekDays">
+    <input type="checkbox" />{{label}}
+  </label>
+</div>
+</div>
+  <br>
+  <a href="#/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Cancelar</a>
+  <button ng-click="save()" ng-disabled="membroForm.$invalid"
+          class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+  <button ng-click="destroy()"
+          ng-show="membro.id" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Deletar</button>
+</form>

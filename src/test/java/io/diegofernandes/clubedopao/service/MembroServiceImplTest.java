@@ -66,7 +66,7 @@ public class MembroServiceImplTest extends BaseTest{
 		    assertNotEquals(dayOfWeek, Calendar.SUNDAY);
 		    
 		    if(encarregadoPao.getIdEncarregado() !=null){
-		    		final List<Integer> disponibilidade = mapMembros.get(encarregadoPao.getIdEncarregado()).getDisponbilidade();
+		    		final List<Integer> disponibilidade = mapMembros.get(encarregadoPao.getIdEncarregado()).getDisponibilidade();
 		    
 		    		assertThat(disponibilidade,hasItem(dayOfWeek));
 		    }

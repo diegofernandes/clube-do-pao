@@ -14,5 +14,7 @@ public interface Repository<T, K extends Serializable> extends Serializable {
 	public T save(T entity);
 
 	public void remove(T entity);
+	
+	public void remove(K id);
 
 }

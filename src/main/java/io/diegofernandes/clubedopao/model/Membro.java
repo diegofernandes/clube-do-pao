@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,10 +39,10 @@ public class Membro implements Serializable {
 	@Column(name = "EMAIL", nullable = false)
 	private String email;
 
-	@ElementCollection
-	@CollectionTable(name = "MEMBRO_DISPONBILIDADE", joinColumns = @JoinColumn(name = "MEMBRO_ID"))
-	@Column(name = "DISPONBILIDADE")
-	private List<Integer> disponbilidade;
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name = "MEMBRO_DISPONIBILIDADE", joinColumns = @JoinColumn(name = "MEMBRO_ID"))
+	@Column(name = "DISPONIBILIDADE")
+	private List<Integer> disponibilidade;
 
 	public Membro() {
 
@@ -60,7 +61,7 @@ public class Membro implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.disponbilidade = disponbilidade;
+		this.disponibilidade = disponbilidade;
 	}
 
 	public Long getId() {
@@ -87,12 +88,12 @@ public class Membro implements Serializable {
 		this.email = email;
 	}
 
-	public List<Integer> getDisponbilidade() {
-		return this.disponbilidade;
+	public List<Integer> getDisponibilidade() {
+		return this.disponibilidade;
 	}
 
-	public void setDisponbilidade(final List<Integer> disponbilidade) {
-		this.disponbilidade = disponbilidade;
+	public void setDisponibilidade(final List<Integer> disponbilidade) {
+		this.disponibilidade = disponbilidade;
 	}
 
 	@Override
@@ -101,7 +102,7 @@ public class Membro implements Serializable {
 		int result = 1;
 		result = prime
 				* result
-				+ ((this.disponbilidade == null) ? 0 : this.disponbilidade
+				+ ((this.disponibilidade == null) ? 0 : this.disponibilidade
 						.hashCode());
 		result = prime * result
 				+ ((this.email == null) ? 0 : this.email.hashCode());
@@ -123,11 +124,11 @@ public class Membro implements Serializable {
 			return false;
 		}
 		final Membro other = (Membro) obj;
-		if (this.disponbilidade == null) {
-			if (other.disponbilidade != null) {
+		if (this.disponibilidade == null) {
+			if (other.disponibilidade != null) {
 				return false;
 			}
-		} else if (!this.disponbilidade.equals(other.disponbilidade)) {
+		} else if (!this.disponibilidade.equals(other.disponibilidade)) {
 			return false;
 		}
 		if (this.email == null) {

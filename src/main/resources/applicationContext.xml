@@ -14,7 +14,7 @@
 		scoped-proxy="targetClass" />
 
 	<mvc:annotation-driven />
-	<mvc:resources mapping="/assets/**" location="/assets/" />
+	<mvc:resources mapping="/**" location="/" />
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -34,7 +34,7 @@
 
 	<jdbc:embedded-database id="dataSource" />
 	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="classpath:dataloader/initialData.sql" />
+		<jdbc:script location="classpath:dataloader/initialize-database.sql" />
 	</jdbc:initialize-database>
 
 	<bean id="entityManagerFactory"
