@@ -67,13 +67,13 @@ module.exports = function (grunt) {
     connect: {
        proxies: [
         {
-          context: '/membro',
+          context: '/app/api',
           host: 'localhost',
           port: 8080,
           https: false,
           changeOrigin: false,
           rewrite: {
-            '': 'clube-do-pao'
+            '^/app': '/clube-do-pao'
           }
         }
       ],

@@ -3,25 +3,25 @@
 angular.module('clubeDoPaoApp')
 .controller('MembroListCtrl',
 		function($scope, $http) {
-			$http.get('membro/all').success(function(data) {
+			$http.get('api/membro/all').success(function(data) {
 				$scope.membros = data;
 			});
 
 })
 .controller('MembroEditCtrl', function($scope,$location, $routeParams, $http) {
 
-	$http.get('membro/' + $routeParams.membroId).success(function(data) {
+	$http.get('api/membro/' + $routeParams.membroId).success(function(data) {
 		$scope.membro = data;
 		$scope.weekDays = workDayMap;
 	});
 
 	$scope.save = function(){
-		$http.post('membro',$scope.membro).then(function(data){
+		$http.post('api/membro',$scope.membro).then(function(data){
 			$location.path('/');
 		});
 	};
 	$scope.destroy = function(){
-		$http.delete('membro/' + $scope.membro.id).then(function(data){
+		$http.delete('api/membro/' + $scope.membro.id).then(function(data){
 
 			$location.path('/');
 		});
@@ -32,7 +32,7 @@ angular.module('clubeDoPaoApp')
 		$scope.weekDays = workDayMap;
 
 	$scope.save = function(){
-		$http.post('membro',$scope.membro).then(function(data){
+		$http.post('api/membro',$scope.membro).then(function(data){
 
 			$location.path('/');
 		});
@@ -42,7 +42,7 @@ angular.module('clubeDoPaoApp')
 })
 .controller('MembroListEncarregadosCtrl',
 		function($scope, $http) {
-			$http.get('membro/all').success(function(data) {
+			$http.get('api/membro/all').success(function(data) {
 				$scope.membros = data;
 			});
 

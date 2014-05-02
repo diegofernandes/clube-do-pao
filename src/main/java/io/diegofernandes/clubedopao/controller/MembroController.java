@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/membro")
+@RequestMapping("membro")
 public class MembroController {
 	
 	@Autowired
