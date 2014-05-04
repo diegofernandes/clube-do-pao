@@ -4,7 +4,10 @@
   <div class="panel-body">
     <a class="btn btn-success hidden-print" href="#/membros/new">
       <span class="glyphicon glyphicon-plus-sign"> Novo</span>
-    </a
+    </a>
+    <a class="btn btn-info hidden-print" href="#/membros/encarregados">
+      <span class="glyphicon glyphicon-list-alt"> Tabela Encarregados</span>
+    </a>
   </div>
 
   <!-- Table -->
@@ -23,7 +26,7 @@
         <td>{{membro.id}}</td>
         <td>{{membro.nome}}</td>
         <td>{{membro.email}}</td>
-        <td><div><span ng-repeat="disp in membro.disponibilidade" class="label label-default">{{disp | dayOfWeek}}</span><div></td>
+        <td><div><span ng-repeat="disp in membro.disponibilidade | orderBy:'toString()'" class="label label-default">{{disp | dayOfWeek}}</span><div></td>
         <td class="hidden-print"><a href="#/membros/edit/{{membro.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
       </tr>
     </tboody>

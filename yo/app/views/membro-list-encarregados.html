@@ -1,31 +1,53 @@
 <div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Membros</div>
-  <div class="panel-body">
-    <a class="btn btn-success hidden-print" href="#/membros/new">
-      <span class="glyphicon glyphicon-plus-sign"> Novo</span>
-    </a
-  </div>
+	<!-- Default panel contents -->
+	<div class="panel-heading">Tabela Encarregados dos Pães</div>
+	<div class="panel-body">
+    <div ng-show="warning" class="alert alert-warning alert-dismissable hidden-print">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Ha dias sem disponibilidade!</strong> Remaneje dias de disponibilidade dos membros.
+    </div>
+		<form name="encarregadosForm">
+			<div class="row hidden-print"
+				ng-class="{error: encarregadosForm.data.$invalid && !encarregadosForm.data.$pristine}">
+        <div class="col-md-4">
+          <a href="#/" class="btn btn-default"><span
+            class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        </div>
+				<div class="col-md-4 col-md-offset-4 input-group">
+					<input type="date" id="data" name="data" ng-model="data"
+						placeholder="yyyy-MM-dd" class="form-control" required /> <span
+						class="input-group-btn">
+						<button ng-click="gerar()"
+							ng-disabled="encarregadosForm.$invalid" class="btn btn-info">Gerar</button>
+					</span>
+          <span class="error"
+            ng-show="encarregadosForm.data.$error.required  && !encarregadosForm.data.$pristine">
+            Obrigatório!</span> <span class="error"
+            ng-show="encarregadosForm.data.$error.date"> Data inválida!</span>
+				</div>
+			</div>
 
-  <!-- Table -->
-  <table class="table table-striped">
-    <thead>
-        <tr>
-          <th>#</th>
-          <th>Nome</th>
-          <th>e-mail</th>
-          <th>Disponibilidade</th>
-          <th class="hidden-print"><span class="glyphicon glyphicon-cog"></span></th>
-        </tr>
-    </thead>
-    <tboody>
-      <tr ng-repeat="membro in membros">
-        <td>{{membro.id}}</td>
-        <td>{{membro.nome}}</td>
-        <td>{{membro.email}}</td>
-        <td><div><span ng-repeat="disp in membro.disponibilidade" class="label label-default">{{disp | dayOfWeek}}</span><div></td>
-        <td class="hidden-print"><a href="#/membros/edit/{{membro.id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-      </tr>
-    </tboody>
-  </table>
+		</form>
+
+		<div ng-show="listaEncarregadosPao">
+			<span>Quantidade de Pães por dia:
+				{{listaEncarregadosPao.membros.length}}</span>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Data</th>
+						<th>Dia da Semana</th>
+						<th>Encarregado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="diaPao in listaEncarregadosPao.listDiaPao">
+						<td>{{diaPao.data | date:format='dd/MM/yyyy'}}</td>
+						<td>{{diaPao.diaDaSemana | dayOfWeek}}</td>
+						<td><span ng-class="{'label label-danger': !diaPao.nomeEncarregado}">{{diaPao.nomeEncarregado | encarregado}}<span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

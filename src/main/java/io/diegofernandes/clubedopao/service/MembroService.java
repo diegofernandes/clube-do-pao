@@ -1,12 +1,11 @@
 package io.diegofernandes.clubedopao.service;
 
-import io.diegofernandes.clubedopao.model.EncarregadoPao;
+import io.diegofernandes.clubedopao.model.ListaEncarregadoPao;
 
 import java.util.Date;
-import java.util.List;
 
 public interface MembroService {
 
-	List<EncarregadoPao> gerarListaEncarregadosPao(Date data);
+	ListaEncarregadoPao gerarListaEncarregadosPao(Date data);
 
 }

@@ -1,5 +1,5 @@
 'use strict';
-var workDayMap = {1: 'Seg',2: 'Ter',3: 'Qua',4: 'Qui',5: 'Sex'};
+var workDayMap = {2: 'Seg',3: 'Ter',4: 'Qua',5: 'Qui',6: 'Sex'};
 
 angular
   .module('clubeDoPaoApp', [
@@ -7,7 +7,8 @@ angular
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'dayOfWeekFilters'
+    'dayOfWeekFilters',
+    'encarregadoFilters'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -18,7 +19,7 @@ angular
       .when('/membros/new',{
         templateUrl: 'views/membroEdit.html',
         controller: 'MembroCreateCtrl'
-      }).when('/membros/encarregadoss',{
+      }).when('/membros/encarregados',{
         templateUrl: 'views/membro-list-encarregados.html',
         controller: 'MembroListEncarregadosCtrl'
       })

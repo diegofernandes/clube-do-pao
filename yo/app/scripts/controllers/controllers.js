@@ -42,9 +42,22 @@ angular.module('clubeDoPaoApp')
 })
 .controller('MembroListEncarregadosCtrl',
 		function($scope, $http) {
-			$http.get('api/membro/all').success(function(data) {
-				$scope.membros = data;
-			});
+			$scope.data = new Date();
+
+			$scope.mapSemana;
+
+			$scope.gerar =  function(){
+				$scope.mapSemana = {};
+				$scope.warning = false;
+				$http.get('api/membro/gerarListaEncarregadosPao/' +  $scope.data).success(function(data) {
+					$scope.listaEncarregadosPao = data;
+					angular.forEach(data.listDiaPao, function(value, key){
+						if(!value.idEncarregado){
+							$scope.warning = true;
+						}
+					});
+				});
+			};
 
 })
 .directive("checkboxGroup", function() {

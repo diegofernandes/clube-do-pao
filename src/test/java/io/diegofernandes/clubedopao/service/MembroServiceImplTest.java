@@ -1,43 +1,39 @@
 package io.diegofernandes.clubedopao.service;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
 import io.diegofernandes.clubedopao.BaseTest;
-import io.diegofernandes.clubedopao.model.EncarregadoPao;
+import io.diegofernandes.clubedopao.model.DiaPao;
+import io.diegofernandes.clubedopao.model.ListaEncarregadoPao;
 import io.diegofernandes.clubedopao.model.Membro;
 import io.diegofernandes.clubedopao.repository.MembroRepository;
-import io.diegofernandes.clubedopao.service.MembroService;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 
-
-public class MembroServiceImplTest extends BaseTest{
+public class MembroServiceImplTest extends BaseTest {
 
 	@Autowired
 	private MembroService membroService;
-	
+
 	@Autowired
 	private MembroRepository membroRepository;
 
-	private Map<Long,Membro> mapMembros;
+	private Map<Long, Membro> mapMembros;
 
 	@Before
 	public void setUp() {
-		
+
 		final List<Membro> membros = membroRepository.findAll();
 		mapMembros = Maps.uniqueIndex(membros, new Function<Membro, Long>() {
 
@@ -48,29 +44,28 @@ public class MembroServiceImplTest extends BaseTest{
 		});
 	}
 
-	
 	@Test
 	@DatabaseSetup("/dataset/membrosTodosDiasDisponiveis.xml")
 	public void test_lista_encarregados() {
 		final Calendar calendar = Calendar.getInstance();
-		final List<EncarregadoPao> encarregadosPao = this.membroService
+		final ListaEncarregadoPao encarregadosPao = this.membroService
 				.gerarListaEncarregadosPao(calendar.getTime());
-		
-		for (EncarregadoPao encarregadoPao : encarregadosPao) {
+
+		for (DiaPao diaoPao : encarregadosPao.getListDiaPao()) {
 			Calendar data = Calendar.getInstance();
-		    data.setTime(encarregadoPao.getData());
-		    
-		    int dayOfWeek =  data.get(Calendar.DAY_OF_WEEK);
-		    
-		    assertNotEquals(dayOfWeek, Calendar.SATURDAY);
-		    assertNotEquals(dayOfWeek, Calendar.SUNDAY);
-		    
-		    if(encarregadoPao.getIdEncarregado() !=null){
-		    		final List<Integer> disponibilidade = mapMembros.get(encarregadoPao.getIdEncarregado()).getDisponibilidade();
-		    
-		    		assertThat(disponibilidade,hasItem(dayOfWeek));
-		    }
-		    
+			data.setTime(diaoPao.getData());
+
+			int dayOfWeek = data.get(Calendar.DAY_OF_WEEK);
+
+			if (diaoPao.getIdEncarregado() != null) {
+				assertNotEquals(dayOfWeek, Calendar.SATURDAY);
+				assertNotEquals(dayOfWeek, Calendar.SUNDAY);
+				final List<Integer> disponibilidade = mapMembros.get(
+						diaoPao.getIdEncarregado()).getDisponibilidade();
+
+				assertThat(disponibilidade, hasItem(dayOfWeek));
+			}
+
 		}
 
 	}

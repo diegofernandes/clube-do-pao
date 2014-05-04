@@ -1,11 +1,17 @@
 package io.diegofernandes.clubedopao.controller;
 
-import java.util.List;
-
+import io.diegofernandes.clubedopao.model.ListaEncarregadoPao;
 import io.diegofernandes.clubedopao.model.Membro;
 import io.diegofernandes.clubedopao.repository.MembroRepository;
+import io.diegofernandes.clubedopao.service.MembroService;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +25,9 @@ public class MembroController {
 	
 	@Autowired
 	private MembroRepository membroRepository;
+	
+	@Autowired
+	private MembroService membroService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public @ResponseBody Membro find(@PathVariable Long id) {
@@ -46,9 +55,9 @@ public class MembroController {
 		membroRepository.remove(id);
 	}
 
+	@RequestMapping(value="/gerarListaEncarregadosPao/{data}", method=RequestMethod.GET)
+	public @ResponseBody ListaEncarregadoPao gerarListaEncarregadosPao(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date data) {
+		return membroService.gerarListaEncarregadosPao(data);
+	}
 	
-	
-	
-	
-
 }

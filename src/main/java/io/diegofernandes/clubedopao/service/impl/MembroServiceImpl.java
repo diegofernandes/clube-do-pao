@@ -1,14 +1,13 @@
 package io.diegofernandes.clubedopao.service.impl;
 
-import io.diegofernandes.clubedopao.model.EncarregadoPao;
+import io.diegofernandes.clubedopao.model.DiaPao;
+import io.diegofernandes.clubedopao.model.ListaEncarregadoPao;
 import io.diegofernandes.clubedopao.model.Membro;
 import io.diegofernandes.clubedopao.repository.MembroRepository;
 import io.diegofernandes.clubedopao.service.MembroService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -16,16 +15,12 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Ordering;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
-import com.google.common.collect.TreeMultimap;
-import com.google.common.primitives.Ints;
 
 @Service
 public class MembroServiceImpl implements MembroService {
@@ -44,12 +39,12 @@ public class MembroServiceImpl implements MembroService {
 	};
 
 	@Override
-	public List<EncarregadoPao> gerarListaEncarregadosPao(final Date dataInicio) {
+	public ListaEncarregadoPao gerarListaEncarregadosPao(final Date dataInicio) {
 		final List<Membro> membros = membroRepository.findAll();
 		final int qtdMembros = membros.size();
-
-		List<EncarregadoPao> listEncarregadoPao = new ArrayList<>();
-
+		
+		final List<DiaPao> listDiaPao = new ArrayList<>();
+		final ListaEncarregadoPao listaEncarregadoPao = new ListaEncarregadoPao(membros, listDiaPao);
 		Calendar data = Calendar.getInstance();
 		data.setTime(dataInicio);
 
@@ -62,14 +57,16 @@ public class MembroServiceImpl implements MembroService {
 		
 		int dayOfWeek;
 		int ciclo = 1;
-		EncarregadoPao encarregadoPao;
+		DiaPao diaPao;
 		while (data.compareTo(dataFim) <= 0) {
+			
 			if (isWorkDay(data)) {
 				dayOfWeek =  data.get(Calendar.DAY_OF_WEEK);
-				encarregadoPao = new EncarregadoPao();
-				listEncarregadoPao.add(encarregadoPao);
-				encarregadoPao.setData(data.getTime());
-				
+				diaPao = new DiaPao();
+				listDiaPao.add(diaPao);
+				diaPao.setData(data.getTime());
+				diaPao.setDiaDaSemana(dayOfWeek);
+				diaPao.setSemana(data.get(Calendar.WEEK_OF_YEAR));
 				Set<Membro> membrosDia = inverse.get(dayOfWeek);
 				Set<Membro> membrosCiclo = cicloMembros.get(ciclo);
 				
@@ -78,8 +75,8 @@ public class MembroServiceImpl implements MembroService {
 				if(!membrosDisponiveis.isEmpty()){
 					Membro membro = ORDERING.min(membrosDisponiveis);
 					cicloMembros.put(ciclo, membro);
-					encarregadoPao.setIdEncarregado(membro.getId());
-					encarregadoPao.setNomeEncarregado(membro.getNome());
+					diaPao.setIdEncarregado(membro.getId());
+					diaPao.setNomeEncarregado(membro.getNome());
 				}
 				
 				if(membrosCiclo.size() == qtdMembros){
@@ -90,7 +87,7 @@ public class MembroServiceImpl implements MembroService {
 			data.add(Calendar.DAY_OF_MONTH, 1);
 		}
 
-		return listEncarregadoPao;
+		return listaEncarregadoPao;
 	}
 
 	private SetMultimap<Integer, Membro> prepareMultimap(List<Membro> membros) {
