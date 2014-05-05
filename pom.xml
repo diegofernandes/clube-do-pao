@@ -212,26 +212,26 @@
 					</webResources>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<filesets>
-						<fileset>
-							<directory>yo/dist</directory>
-						</fileset>
-						<fileset>
-							<directory>yo/.tmp</directory>
-						</fileset>
-						<fileset>
-							<directory>yo/app/components</directory>
-						</fileset>
-						<fileset>
-							<directory>yo/node_modules</directory>
-						</fileset>
-					</filesets>
-				</configuration>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<artifactId>maven-clean-plugin</artifactId> -->
+<!-- 				<version>2.5</version> -->
+<!-- 				<configuration> -->
+<!-- 					<filesets> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>yo/dist</directory> -->
+<!-- 						</fileset> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>yo/.tmp</directory> -->
+<!-- 						</fileset> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>yo/app/components</directory> -->
+<!-- 						</fileset> -->
+<!-- 						<fileset> -->
+<!-- 							<directory>yo/node_modules</directory> -->
+<!-- 						</fileset> -->
+<!-- 					</filesets> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
 <!-- 			<plugin> -->
 <!-- 				<groupId>com.github.trecloux</groupId> -->
 <!-- 				<artifactId>yeoman-maven-plugin</artifactId> -->
