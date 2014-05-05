@@ -1,3 +1,10 @@
 language: java
 before_install:
-  - 'npm install -g bower grunt-cli'
+- npm install -g bower grunt-cli
+deploy:
+  provider: heroku
+  api_key:
+    secure: hqo4S0IpUl53hnjwIHz2zZq4+D4l0EQ57Qg6Jadj6tnfko1F2l5Wr3h+M5BoL3ep/+BlFqExi1c5pWA+Ruhz3E2TX8zlv2yK2Y/YbY9UlRRExPdkuv6Z+Uebr1vh+NWH93S4nep/lx2lhlQcHQ4VYwpIjdCe8rwTJ6CZGgWoo0k=
+  app: enigmatic-refuge-6857
+  on:
+    repo: diegofernandes/clube-do-pao
