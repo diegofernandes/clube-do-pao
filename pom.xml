@@ -232,21 +232,21 @@
 					</filesets>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>com.github.trecloux</groupId>
-				<artifactId>yeoman-maven-plugin</artifactId>
-				<version>0.2</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!-- 			<plugin> -->
+<!-- 				<groupId>com.github.trecloux</groupId> -->
+<!-- 				<artifactId>yeoman-maven-plugin</artifactId> -->
+<!-- 				<version>0.2</version> -->
+<!-- 				<configuration> -->
+<!-- 					<skipTests>true</skipTests> -->
+<!-- 				</configuration> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<goals> -->
+<!-- 							<goal>build</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
